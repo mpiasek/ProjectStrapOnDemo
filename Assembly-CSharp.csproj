@@ -6,7 +6,7 @@
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <RootNamespace></RootNamespace>
-    <ProjectGuid>{EEE6A3F5-CD2E-B31D-E115-96D326A3FFFB}</ProjectGuid>
+    <ProjectGuid>{DC8E6C89-D77A-E92F-36E7-5D6CD8767E67}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <AssemblyName>Assembly-CSharp</AssemblyName>
@@ -48,6 +48,12 @@
   <ItemGroup>
      <Compile Include="Assets\Scripts\ControllerGrabObject.cs" />
      <Compile Include="Assets\Scripts\LaserPointer.cs" />
+     <Compile Include="Assets\Scripts\PlayerInfo.cs" />
+     <Compile Include="Assets\Scripts\StrapOn\BraceletSerialPort.cs" />
+     <Compile Include="Assets\Scripts\StrapOn\BraceletTrackedObjectThread.cs" />
+     <Compile Include="Assets\Scripts\StrapOn\SerialPortThread.cs" />
+     <Compile Include="Assets\Scripts\StrapOn\TrackedObjectThread.cs" />
+     <Compile Include="Assets\Scripts\StrapOn\TrackingAlgorithmDouble.cs" />
      <Compile Include="Assets\Scripts\ViveControllerInputTest.cs" />
      <Compile Include="Assets\SteamVR\Extras\SteamVR_GazeTracker.cs" />
      <Compile Include="Assets\SteamVR\Extras\SteamVR_LaserPointer.cs" />
