@@ -3,21 +3,19 @@ using UnityEngine.UI;
 using System.Collections;
 
 public class PlayerInfo : MonoBehaviour {
-	public int maximumHealth = 50;
-	public int currentHealth = 50;
+	public int currentScore = 0;
 
-	public int maximumMana = 50;
-	public int currentMana = 50;
+	public int maximumBullets = 12;
+	public int currentBullets = 12;
 
-	/*	Health UI
+	/*	Score UI
 	 */
-	private Text healthValue;
-	private Slider healthBar;
+	private Text scoreValue;
 
-	/*	Mana UI
+
+	/*	Bullet UI
 	 */
-	private Text manaValue;
-	private Slider manaBar;
+	private Text bulletValue;
 
 	// Use this for initialization
 	void Start () {
@@ -25,20 +23,20 @@ public class PlayerInfo : MonoBehaviour {
 		/*
 		 * 	Health Initialization
 		 */
-		healthValue = transform.Find ("HealthValue").GetComponent<Text>();
-		healthBar	= transform.Find ("HealthBar").GetComponent<Slider>();
-		healthBar.maxValue = maximumHealth;
-		healthBar.minValue = 0;
-		resetHealth ();
+		scoreValue = transform.Find ("ScoreValue").GetComponent<Text>();
+//		healthBar	= transform.Find ("HealthBar").GetComponent<Slider>();
+//		healthBar.maxValue = maximumHealth;
+//		healthBar.minValue = 0;
+		resetScore ();
 
 		/*
 		 * 	Mana Initialization
 		 */
-		manaValue	= transform.Find ("ManaValue").GetComponent<Text>();
-		manaBar 	= transform.Find ("ManaBar").GetComponent<Slider>();
-		manaBar.maxValue = maximumMana;
-		manaBar.minValue = 0;
-		resetMana ();
+		bulletValue	= transform.Find ("BulletValue").GetComponent<Text>();
+//		manaBar 	= transform.Find ("ManaBar").GetComponent<Slider>();
+//		manaBar.maxValue = maximumMana;
+//		manaBar.minValue = 0;
+		resetBullets ();
 	}
 	
 	// Update is called once per frame
@@ -47,67 +45,61 @@ public class PlayerInfo : MonoBehaviour {
 		 * 		Keyboard Testing
 		 */
 		if (Input.GetKeyDown (KeyCode.LeftArrow)) {
-			deductHealth (5);
-			deductMana (5);
+//			deductHealth (5);
+//			deductMana (5);
 		} else if (Input.GetKeyDown (KeyCode.RightArrow)) {
-			increaseHealth (5);
-			increaseMana (5);
-		}
+//			increaseHealth (5);
+//			increaseMana (5);
+	}
 	
 	}
 
 	/*
 	 * 		Affects HP
 	 */
-	void deductHealth(int amount){
-		currentHealth -= amount;
-		if (currentHealth < 0) {
-			currentHealth = 0;
+	public void deductScore(int amount){
+		currentScore -= amount;
+		if (currentScore < 0) {
+			currentScore = 0;
 		}
-		healthValue.text = currentHealth.ToString() + "/" + maximumHealth.ToString();
-		healthBar.value = currentHealth;
+		scoreValue.text = currentScore.ToString ();
 	}
 
-	void increaseHealth(int amount){
-		currentHealth += amount;
-		if (currentHealth > maximumHealth) {
-			resetHealth ();
-		}
-		healthValue.text = currentHealth.ToString() + "/" + maximumHealth.ToString();
-		healthBar.value = currentHealth;
+	public void increaseScore(int amount){
+		currentScore += amount;
+//		if (currentScore > maximumHealth) {
+//			resetHealth ();
+//		}
+		scoreValue.text = currentScore.ToString();
 	}
 
-	void resetHealth(){
-		currentHealth = maximumHealth;
-		healthValue.text = currentHealth.ToString() + "/" + maximumHealth.ToString();
-		healthBar.value = currentHealth;
+	public void resetScore(){
+		currentScore = 0;
+		scoreValue.text = currentScore.ToString ();
 	}
 
 
 	/*
 	 * 		Affects Mana
 	 */
-	void deductMana(int amount){
-		currentMana -= amount;
-		if (currentMana < 0) {
-			currentMana = 0;
+	public void deductBullets(int amount){
+		currentBullets -= amount;
+		if (currentBullets < 1) {
+			currentBullets = 0;
 		}
-		manaValue.text = currentMana.ToString() + "/" + maximumMana.ToString();
-		manaBar.value = currentMana;
+		bulletValue.text = currentBullets.ToString() + "/" + maximumBullets.ToString();
 	}
 		
-	void increaseMana(int amount){
-		currentMana += amount;
-		if (currentMana > maximumMana) {
-			resetMana ();
+	public void increaseBullets(int amount){
+		currentBullets += amount;
+		if (currentBullets > maximumBullets) {
+			resetBullets ();
 		}
-		manaValue.text = currentMana.ToString() + "/" + maximumMana.ToString();
-		manaBar.value = currentMana;
+		bulletValue.text = currentBullets.ToString() + "/" + maximumBullets.ToString();
 	}
 
-	void resetMana(){
-		currentMana = maximumMana;
-		manaValue.text = currentMana.ToString() + "/" + maximumMana.ToString();
-		manaBar.value = currentMana;
+	public void resetBullets(){
+		currentBullets = maximumBullets;
+		bulletValue.text = currentBullets.ToString() + "/" + maximumBullets.ToString();
 	}
 }

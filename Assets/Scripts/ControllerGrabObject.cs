@@ -81,13 +81,13 @@ public class ControllerGrabObject : MonoBehaviour {
     // Update is called once per frame
     void Update () {
         //When the player squeezes the trigger, grab the object
-		if (Controller.GetHairTriggerDown())
+		if (Controller.GetPressDown(SteamVR_Controller.ButtonMask.Grip))
         {
             if (collidingObject)
                 GrabObject();
         }
         // If the player releases the trigger and there's an object attached to the controller, release it
-        if (Controller.GetHairTriggerUp())
+		if (Controller.GetPressDown(SteamVR_Controller.ButtonMask.Grip))
         {
             if (objectInHand)
                 ReleaseObject();
