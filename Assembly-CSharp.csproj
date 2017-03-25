@@ -110,6 +110,7 @@
      <Compile Include="Assets\Scripts\StrapOn\TrackedObjectThread.cs" />
      <Compile Include="Assets\Scripts\StrapOn\TrackingAlgorithmDouble.cs" />
      <Compile Include="Assets\Scripts\ViveControllerInputTest.cs" />
+     <Compile Include="Assets\SensorPlacements.cs" />
      <Compile Include="Assets\SteamVR\Extras\SteamVR_GazeTracker.cs" />
      <Compile Include="Assets\SteamVR\Extras\SteamVR_LaserPointer.cs" />
      <Compile Include="Assets\SteamVR\Extras\SteamVR_Teleporter.cs" />

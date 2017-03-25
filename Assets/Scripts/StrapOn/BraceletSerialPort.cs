@@ -18,6 +18,14 @@ public class BraceletSerialPort : MonoBehaviour {
 	public TrackingAlgorithmDouble.objectLocation Sensor1;
 	public TrackingAlgorithmDouble.objectLocation Sensor2;
 	public TrackingAlgorithmDouble.objectLocation Sensor3;
+	public TrackingAlgorithmDouble.objectLocation Sensor4;
+	public TrackingAlgorithmDouble.objectLocation Sensor5;
+	public TrackingAlgorithmDouble.objectLocation Sensor6;
+	public TrackingAlgorithmDouble.objectLocation Sensor7;
+	public TrackingAlgorithmDouble.objectLocation Sensor8;
+	public TrackingAlgorithmDouble.objectLocation Sensor9;
+	public TrackingAlgorithmDouble.objectLocation Sensor10;
+
 	public TrackingAlgorithmDouble.Imu Imu;
 
 	/*
@@ -101,6 +109,94 @@ public class BraceletSerialPort : MonoBehaviour {
 						}
 						Sensor3.elevation = (180.0 - temp) * Math.PI / 180.0;
 
+
+
+						if (!float.TryParse (parser [11], out temp)) {
+							Debug.Log ("Unable to convert 4Azimuth");
+							continue;
+						};
+						Sensor4.azimuth = temp * Math.PI / 180.0;
+
+						if (!float.TryParse (parser [12], out temp)) {
+							Debug.Log ("Unable to convert 4Elevation");
+							continue;
+						}
+						Sensor4.elevation = (180.0 - temp)* Math.PI / 180.0;
+
+						if (!float.TryParse (parser [14], out temp)) {
+							Debug.Log ("Unable to convert 5Azimuth");
+							continue;
+						};
+						Sensor5.azimuth = temp * Math.PI / 180.0;
+
+						if (!float.TryParse (parser [15], out temp)) {
+							Debug.Log ("Unable to convert 5Elevation");
+							continue;
+						}
+						Sensor5.elevation = (180.0 - temp) * Math.PI / 180.0;
+
+						if (!float.TryParse (parser [17], out temp)) {
+							Debug.Log ("Unable to convert 6Azimuth");
+							continue;
+						};
+						Sensor6.azimuth = temp * Math.PI / 180.0;
+
+						if (!float.TryParse (parser [18], out temp)) {
+							Debug.Log ("Unable to convert 6Elevation");
+							continue;
+						}
+						Sensor6.elevation = (180.0 - temp) * Math.PI / 180.0;
+
+
+
+						if (!float.TryParse (parser [20], out temp)) {
+							Debug.Log ("Unable to convert 7Azimuth");
+							continue;
+						};
+						Sensor7.azimuth = temp * Math.PI / 180.0;
+
+						if (!float.TryParse (parser [21], out temp)) {
+							Debug.Log ("Unable to convert 7Elevation");
+							continue;
+						}
+						Sensor7.elevation = (180.0 - temp)* Math.PI / 180.0;
+
+						if (!float.TryParse (parser [23], out temp)) {
+							Debug.Log ("Unable to convert 8Azimuth");
+							continue;
+						};
+						Sensor8.azimuth = temp * Math.PI / 180.0;
+
+						if (!float.TryParse (parser [24], out temp)) {
+							Debug.Log ("Unable to convert 8Elevation");
+							continue;
+						}
+						Sensor8.elevation = (180.0 - temp) * Math.PI / 180.0;
+
+						if (!float.TryParse (parser [26], out temp)) {
+							Debug.Log ("Unable to convert 9Azimuth");
+							continue;
+						};
+						Sensor9.azimuth = temp * Math.PI / 180.0;
+
+						if (!float.TryParse (parser [27], out temp)) {
+							Debug.Log ("Unable to convert 9Elevation");
+							continue;
+						}
+						Sensor9.elevation = (180.0 - temp) * Math.PI / 180.0;
+
+						if (!float.TryParse (parser [29], out temp)) {
+							Debug.Log ("Unable to convert 10Azimuth");
+							continue;
+						};
+						Sensor10.azimuth = temp * Math.PI / 180.0;
+
+						if (!float.TryParse (parser [30], out temp)) {
+							Debug.Log ("Unable to convert 10Elevation");
+							continue;
+						}
+						Sensor10.elevation = (180.0 - temp) * Math.PI / 180.0;
+
 						//Debug.Log("A" + arduino);
 						//Debug.Log ("S1 " + Sensor1.azimuth * 180.0 / Math.PI + " " + Sensor1.elevation* 180.0 / Math.PI  + " 2 " + Sensor2.azimuth * 180.0 / Math.PI + " " + Sensor2.elevation * 180.0 / Math.PI + " 3 " + Sensor3.azimuth * 180.0 / Math.PI + " " + Sensor3.elevation* 180.0 / Math.PI );
 
@@ -165,6 +261,20 @@ public class BraceletSerialPort : MonoBehaviour {
 						Sensor2.elevation = 0;
 						Sensor3.azimuth = 0;
 						Sensor3.elevation = 0;
+						Sensor4.azimuth = 0;
+						Sensor4.elevation = 0;
+						Sensor5.azimuth = 0;
+						Sensor5.elevation = 0;
+						Sensor6.azimuth = 0;
+						Sensor6.elevation = 0;
+						Sensor7.azimuth = 0;
+						Sensor7.elevation = 0;
+						Sensor8.azimuth = 0;
+						Sensor8.elevation = 0;
+						Sensor9.azimuth = 0;
+						Sensor9.elevation = 0;
+						Sensor10.azimuth = 0;
+						Sensor10.elevation = 0;
 					}
 					else
 					{

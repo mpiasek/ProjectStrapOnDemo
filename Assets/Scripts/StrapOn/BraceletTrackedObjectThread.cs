@@ -7,6 +7,17 @@ public class BraceletTrackedObjectThread : MonoBehaviour {
 	public TrackingAlgorithmDouble.objectLocation Sensor1;
 	public TrackingAlgorithmDouble.objectLocation Sensor2;
 	public TrackingAlgorithmDouble.objectLocation Sensor3;
+
+	public TrackingAlgorithmDouble.objectLocation Sensor4;
+	public TrackingAlgorithmDouble.objectLocation Sensor5;
+	public TrackingAlgorithmDouble.objectLocation Sensor6;
+
+	public TrackingAlgorithmDouble.objectLocation Sensor7;
+	public TrackingAlgorithmDouble.objectLocation Sensor8;
+	public TrackingAlgorithmDouble.objectLocation Sensor9;
+
+	public TrackingAlgorithmDouble.objectLocation Sensor10;
+
 	public TrackingAlgorithmDouble.sensorDistance array;
 	public TrackingAlgorithmDouble.Imu Imu;
 	public Vector3 Position;
@@ -36,11 +47,38 @@ public class BraceletTrackedObjectThread : MonoBehaviour {
 		Sensor3.azimuth = gameObject.GetComponent<BraceletSerialPort>().Sensor3.azimuth;
 		Sensor3.elevation = gameObject.GetComponent<BraceletSerialPort>().Sensor3.elevation;
 
+		Sensor4.azimuth = gameObject.GetComponent<BraceletSerialPort>().Sensor4.azimuth;
+		Sensor4.elevation = gameObject.GetComponent<BraceletSerialPort>().Sensor4.elevation;
+
+		Sensor5.azimuth = gameObject.GetComponent<BraceletSerialPort>().Sensor5.azimuth;
+		Sensor5.elevation = gameObject.GetComponent<BraceletSerialPort>().Sensor5.elevation;
+
+		Sensor6.azimuth = gameObject.GetComponent<BraceletSerialPort>().Sensor6.azimuth;
+		Sensor6.elevation = gameObject.GetComponent<BraceletSerialPort>().Sensor6.elevation;
+
+		Sensor7.azimuth = gameObject.GetComponent<BraceletSerialPort>().Sensor7.azimuth;
+		Sensor7.elevation = gameObject.GetComponent<BraceletSerialPort>().Sensor7.elevation;
+
+		Sensor8.azimuth = gameObject.GetComponent<BraceletSerialPort>().Sensor8.azimuth;
+		Sensor8.elevation = gameObject.GetComponent<BraceletSerialPort>().Sensor8.elevation;
+
+		Sensor9.azimuth = gameObject.GetComponent<BraceletSerialPort>().Sensor9.azimuth;
+		Sensor9.elevation = gameObject.GetComponent<BraceletSerialPort>().Sensor9.elevation;
+
+		Sensor10.azimuth = gameObject.GetComponent<BraceletSerialPort>().Sensor10.azimuth;
+		Sensor10.elevation = gameObject.GetComponent<BraceletSerialPort>().Sensor10.elevation;
+
 		TrackingAlgorithmDouble.runAlgorithm (ref Sensor1, ref Sensor2, ref Sensor3, ref array);
 
 		//Debug.Log ("1 " + Sensor1.azimuth * 180.0 / Math.PI + " " + Sensor1.elevation* 180.0 / Math.PI  + " 2 " + Sensor2.azimuth * 180.0 / Math.PI + " " + Sensor2.elevation * 180.0 / Math.PI + " 3 " + Sensor3.azimuth * 180.0 / Math.PI + " " + Sensor3.elevation* 180.0 / Math.PI );
 		//Debug.Log ("Position: " + Sensor1.distance + " " + Sensor2.distance + " " + Sensor3.distance);
 		updatePosition (ref Sensor1, ref Sensor2, ref Sensor3, gameObject.GetComponent<BraceletSerialPort>().Imu.a, gameObject.GetComponent<BraceletSerialPort>().Imu.deltaT, gameObject.GetComponent<BraceletSerialPort>().Imu.q);
+	}
+
+	/*
+	** 
+	*/
+	void chooseSensors (){
 	}
 
 	/*
