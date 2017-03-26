@@ -1,4 +1,4 @@
 sceneSetups:
-- path: Assets/VideoBracelet.unity
+- path: Assets/Scenes/IntegratedDemo.unity
   isLoaded: 1
   isActive: 1

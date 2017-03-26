@@ -18,6 +18,7 @@ public class BraceletTrackedObjectThread : MonoBehaviour {
 
 	public TrackingAlgorithmDouble.objectLocation Sensor10;
 
+    public Transform basestation;
 	public TrackingAlgorithmDouble.sensorDistance array;
 	public TrackingAlgorithmDouble.Imu Imu;
 	public Vector3 Position;
@@ -32,6 +33,7 @@ public class BraceletTrackedObjectThread : MonoBehaviour {
 		Sensor1.distance = 20.66;
 		Sensor2.distance = 20.58;
 		Sensor3.distance = 20.79;
+        basestation = transform.parent;
 	}
 
 	void Update () {
@@ -125,6 +127,7 @@ public class BraceletTrackedObjectThread : MonoBehaviour {
 		//Sensors return 0 if reading is erroneous. So let IMU take over position.
 		if (sensor1.azimuth != 0 && sensor1.elevation != 0 && sensor2.azimuth != 0 && sensor2.elevation != 0 && sensor3.azimuth != 0 && sensor3.elevation != 0) 
 		{
+            
 			Position = new Vector3 (sens1x, sens1y, sens1z);
 			Imu.s.x = sens1x;
 			Imu.s.y = sens1y;
@@ -141,7 +144,7 @@ public class BraceletTrackedObjectThread : MonoBehaviour {
 			Position = Imu.s;
 		}
 
-		transform.position = Position;
+		transform.localPosition = Position;
 
 		localAxisFix.w = (float)Math.Cos (Math.PI / 4f);
 		localAxisFix.x = 0;
