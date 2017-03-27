@@ -27,18 +27,29 @@ public class BraceletTrackedObjectThread : MonoBehaviour {
 	*/
 
 	void Start(){
-		array.AB = 3;
-		array.AC = 5.5;
-		array.BC = 3;
-		Sensor1.distance = 20.66;
-		Sensor2.distance = 20.58;
-		Sensor3.distance = 20.79;
+		array.AB = 0.06;
+		array.AC = 0.055;
+		array.BC = 0.065;
+		Sensor1.distance = 1;
+		Sensor2.distance = 1;
+		Sensor3.distance = 1;
         basestation = transform.parent;
 	}
 
 	void Update () {
 		//actualPosition ();
 		//Debug.Log ("Position: " + Sensor1.distance + " " + Sensor2.distance + " " + Sensor3.distance);
+		/*
+		Sensor1.azimuth = gameObject.GetComponent<SerialPortThread>().Sensor1.azimuth;
+		Sensor1.elevation = gameObject.GetComponent<SerialPortThread>().Sensor1.elevation;
+
+		Sensor2.azimuth = gameObject.GetComponent<SerialPortThread>().Sensor2.azimuth;
+		Sensor2.elevation = gameObject.GetComponent<SerialPortThread>().Sensor2.elevation;
+
+		Sensor3.azimuth = gameObject.GetComponent<SerialPortThread>().Sensor3.azimuth;
+		Sensor3.elevation = gameObject.GetComponent<SerialPortThread>().Sensor3.elevation;
+		*/
+
 		// Grab new data from the other SerialPortThread script
 		Sensor1.azimuth = gameObject.GetComponent<BraceletSerialPort>().Sensor1.azimuth;
 		Sensor1.elevation = gameObject.GetComponent<BraceletSerialPort>().Sensor1.elevation;
@@ -72,7 +83,7 @@ public class BraceletTrackedObjectThread : MonoBehaviour {
 
 		TrackingAlgorithmDouble.runAlgorithm (ref Sensor1, ref Sensor2, ref Sensor3, ref array);
 
-		//Debug.Log ("1 " + Sensor1.azimuth * 180.0 / Math.PI + " " + Sensor1.elevation* 180.0 / Math.PI  + " 2 " + Sensor2.azimuth * 180.0 / Math.PI + " " + Sensor2.elevation * 180.0 / Math.PI + " 3 " + Sensor3.azimuth * 180.0 / Math.PI + " " + Sensor3.elevation* 180.0 / Math.PI );
+		Debug.Log ("1 " + Sensor1.azimuth * 180.0 / Math.PI + " " + Sensor1.elevation* 180.0 / Math.PI  + " 2 " + Sensor2.azimuth * 180.0 / Math.PI + " " + Sensor2.elevation * 180.0 / Math.PI + " 3 " + Sensor3.azimuth * 180.0 / Math.PI + " " + Sensor3.elevation* 180.0 / Math.PI );
 		//Debug.Log ("Position: " + Sensor1.distance + " " + Sensor2.distance + " " + Sensor3.distance);
 		updatePosition (ref Sensor1, ref Sensor2, ref Sensor3, gameObject.GetComponent<BraceletSerialPort>().Imu.a, gameObject.GetComponent<BraceletSerialPort>().Imu.deltaT, gameObject.GetComponent<BraceletSerialPort>().Imu.q);
 	}
@@ -141,7 +152,7 @@ public class BraceletTrackedObjectThread : MonoBehaviour {
 		} 
 		else 
 		{
-			Position = Imu.s;
+			//Position = Imu.s;
 		}
 
 		transform.localPosition = Position;

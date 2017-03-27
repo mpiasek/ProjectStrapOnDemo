@@ -48,7 +48,7 @@ public class SerialPortThread : MonoBehaviour{
 				try{
 					string arduino = stream.ReadLine ();
 				
-					//Debug.Log ("Line is read");
+					Debug.Log ("Line is read");
 					string[] parser = arduino.Split (' ');
 					float temp;
 
@@ -89,7 +89,7 @@ public class SerialPortThread : MonoBehaviour{
 					Sensor3.elevation = (180.0 - temp) * Math.PI / 180.0;
 			
 					//Debug.Log("A" + arduino);
-					Debug.Log ("S1 " + Sensor1.azimuth * 180.0 / Math.PI + " " + Sensor1.elevation* 180.0 / Math.PI  + " 2 " + Sensor2.azimuth * 180.0 / Math.PI + " " + Sensor2.elevation * 180.0 / Math.PI + " 3 " + Sensor3.azimuth * 180.0 / Math.PI + " " + Sensor3.elevation* 180.0 / Math.PI );
+					//Debug.Log ("S1 " + Sensor1.azimuth * 180.0 / Math.PI + " " + Sensor1.elevation* 180.0 / Math.PI  + " 2 " + Sensor2.azimuth * 180.0 / Math.PI + " " + Sensor2.elevation * 180.0 / Math.PI + " 3 " + Sensor3.azimuth * 180.0 / Math.PI + " " + Sensor3.elevation* 180.0 / Math.PI );
 				} catch(TimeoutException e){
 					continue;
 				}

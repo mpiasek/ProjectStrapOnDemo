@@ -63,10 +63,10 @@ public class BraceletSerialPort : MonoBehaviour {
 				//Debug.Log ("Stream is open");
 				try{
 					string arduino = stream.ReadLine ();
-					//Debug.Log ("Line is read");
+					Debug.Log ("Line is read");
 					string[] parser = arduino.Split (' ');
 					float temp;
-
+					Debug.Log(arduino);
 					MessageCounter++; //Used to enumerate the number of lines read from serial
 					//a temporary way of determing when to clear the serial input buffer
 
@@ -110,7 +110,7 @@ public class BraceletSerialPort : MonoBehaviour {
 						Sensor3.elevation = (180.0 - temp) * Math.PI / 180.0;
 
 
-
+						/*
 						if (!float.TryParse (parser [11], out temp)) {
 							Debug.Log ("Unable to convert 4Azimuth");
 							continue;
@@ -196,7 +196,7 @@ public class BraceletSerialPort : MonoBehaviour {
 							continue;
 						}
 						Sensor10.elevation = (180.0 - temp) * Math.PI / 180.0;
-
+						*/
 						//Debug.Log("A" + arduino);
 						//Debug.Log ("S1 " + Sensor1.azimuth * 180.0 / Math.PI + " " + Sensor1.elevation* 180.0 / Math.PI  + " 2 " + Sensor2.azimuth * 180.0 / Math.PI + " " + Sensor2.elevation * 180.0 / Math.PI + " 3 " + Sensor3.azimuth * 180.0 / Math.PI + " " + Sensor3.elevation* 180.0 / Math.PI );
 
@@ -231,19 +231,19 @@ public class BraceletSerialPort : MonoBehaviour {
 							Debug.Log ("Unable to find World Acceleration X");
 							continue;
 						};
-						Imu.a.x = (temp / 8192f) * 981.0f;
+						Imu.a.x = (temp / 8192f) * 9.810f;
 
 						if (!float.TryParse (parser [6], out temp)) {
 							Debug.Log ("Unable to find World Acceleration Y");
 							continue;
 						};
-						Imu.a.y = (temp / 8192f) * 981.0f;
+						Imu.a.y = (temp / 8192f) * 9.810f;
 
 						if (!float.TryParse (parser [7], out temp)) {
 							Debug.Log ("Unable to find World Acceleration Z");
 							continue;
 						};
-						Imu.a.z = (temp / 8192f) * 981.0f;
+						Imu.a.z = (temp / 8192f) * 9.810f;
 
 						if (!float.TryParse (parser [8], out temp)) {
 							Debug.Log ("Unable to find Delta Time");
