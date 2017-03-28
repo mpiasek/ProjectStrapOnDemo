@@ -10,12 +10,12 @@ public class PlayerInfo : MonoBehaviour {
 
 	/*	Score UI
 	 */
-	private Text scoreValue;
+	public Text scoreValue;
 
 
 	/*	Bullet UI
 	 */
-	private Text bulletValue;
+	public Text bulletValue;
 
 	// Use this for initialization
 	void Start () {
@@ -23,20 +23,18 @@ public class PlayerInfo : MonoBehaviour {
 		/*
 		 * 	Health Initialization
 		 */
-		scoreValue = transform.Find ("ScoreValue").GetComponent<Text>();
 //		healthBar	= transform.Find ("HealthBar").GetComponent<Slider>();
 //		healthBar.maxValue = maximumHealth;
 //		healthBar.minValue = 0;
-		resetScore ();
+		//resetScore ();
 
 		/*
 		 * 	Mana Initialization
 		 */
-		bulletValue	= transform.Find ("BulletValue").GetComponent<Text>();
 //		manaBar 	= transform.Find ("ManaBar").GetComponent<Slider>();
 //		manaBar.maxValue = maximumMana;
 //		manaBar.minValue = 0;
-		resetBullets ();
+		//resetBullets ();
 	}
 	
 	// Update is called once per frame
@@ -45,7 +43,7 @@ public class PlayerInfo : MonoBehaviour {
 		 * 		Keyboard Testing
 		 */
 		if (Input.GetKeyDown (KeyCode.LeftArrow)) {
-//			deductHealth (5);
+            deductBullets(1);
 //			deductMana (5);
 		} else if (Input.GetKeyDown (KeyCode.RightArrow)) {
 //			increaseHealth (5);
@@ -57,8 +55,8 @@ public class PlayerInfo : MonoBehaviour {
 	/*
 	 * 		Affects HP
 	 */
-	public void deductScore(int amount){
-		currentScore -= amount;
+	public void targetHit(){
+		currentScore -= 1;
 		if (currentScore < 0) {
 			currentScore = 0;
 		}
@@ -74,7 +72,7 @@ public class PlayerInfo : MonoBehaviour {
 	}
 
 	public void resetScore(){
-		currentScore = 0;
+		currentScore = 5;
 		scoreValue.text = currentScore.ToString ();
 	}
 

@@ -29,23 +29,22 @@ public class GunControl : NVRInteractableItem
 	public override void UseButtonDown()
 	{
 		base.UseButtonDown();
-		if (playerStatus.GetComponent<PlayerInfo>().currentBullets > 0) {
-			playerStatus.GetComponent<PlayerInfo>().deductBullets(1);
+        print("hi");
+		//if (playerStatus.GetComponent<PlayerInfo>().currentBullets > 0) {
+		//	playerStatus.GetComponent<PlayerInfo>().deductBullets(1);
 			// Add reference to rounds in magazine
-			AttachedHand.TriggerHapticPulse(500);
+			AttachedHand.TriggerHapticPulse(2000);
 			RaycastHit hit;
 			// Shoot a ray from controller, if it hits store the hit point, check if it hit a target, and increase score
 			if (Physics.Raycast (FirePoint.position, FirePoint.forward, out hit, 100, targetMask)) {
 				hitPoint = hit.point;
 				if (findTarget (hitPoint)) 
-					playerStatus.GetComponent<PlayerInfo> ().increaseScore (100);
-				else 	
-					playerStatus.GetComponent<PlayerInfo> ().deductScore (50);
+					playerStatus.GetComponent<PlayerInfo> ().targetHit();
 			
 			}
-		}
-		else {
-			playerStatus.GetComponent<PlayerInfo> ().resetBullets();
-		}
+		//}
+		//else {
+		//	playerStatus.GetComponent<PlayerInfo> ().resetBullets();
+		//}
 	}
 }
