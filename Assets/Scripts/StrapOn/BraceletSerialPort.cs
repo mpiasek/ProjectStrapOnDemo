@@ -60,13 +60,13 @@ public class BraceletSerialPort : MonoBehaviour {
 			// If serial port is successfully opened, read from buffer
 			//Debug.Log("Running thread");
 			if (stream.IsOpen) {
-				//Debug.Log ("Stream is open");
+				//.Log ("Stream is open");
 				try{
 					string arduino = stream.ReadLine ();
-					Debug.Log ("Line is read");
+					//Debug.Log ("Line is read");
 					string[] parser = arduino.Split (' ');
 					float temp;
-					Debug.Log(arduino);
+					//Debug.Log(arduino);
 					MessageCounter++; //Used to enumerate the number of lines read from serial
 					//a temporary way of determing when to clear the serial input buffer
 
@@ -297,7 +297,7 @@ public class BraceletSerialPort : MonoBehaviour {
 			if (MessageCounter >= 10) {
 				stream.DiscardInBuffer ();
 				MessageCounter = 0;
-				Debug.Log ("Discarding Buffer");
+				//Debug.Log ("Discarding Buffer");
 			}
 		}
 		Debug.Log ("Closing Stream");

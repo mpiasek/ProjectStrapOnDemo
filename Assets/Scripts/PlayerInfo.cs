@@ -15,7 +15,9 @@ public class PlayerInfo : MonoBehaviour {
 
 	/*	Bullet UI
 	 */
+
 	public Text bulletValue;
+    private Slider bulletBar;
 
 	// Use this for initialization
 	void Start () {
@@ -31,6 +33,12 @@ public class PlayerInfo : MonoBehaviour {
 		/*
 		 * 	Mana Initialization
 		 */
+		bulletValue	= transform.Find ("BulletValue").GetComponent<Text>();
+        bulletBar = transform.Find("BulletBar").GetComponent<Slider>();
+        bulletBar.maxValue = maximumBullets;
+        bulletBar.value = bulletBar.maxValue;
+        bulletBar.minValue = 0;
+
 //		manaBar 	= transform.Find ("ManaBar").GetComponent<Slider>();
 //		manaBar.maxValue = maximumMana;
 //		manaBar.minValue = 0;
@@ -86,7 +94,8 @@ public class PlayerInfo : MonoBehaviour {
 			currentBullets = 0;
 		}
 		bulletValue.text = currentBullets.ToString() + "/" + maximumBullets.ToString();
-	}
+        bulletBar.value = currentBullets;
+    }
 		
 	public void increaseBullets(int amount){
 		currentBullets += amount;
@@ -94,10 +103,12 @@ public class PlayerInfo : MonoBehaviour {
 			resetBullets ();
 		}
 		bulletValue.text = currentBullets.ToString() + "/" + maximumBullets.ToString();
-	}
+        bulletBar.value = currentBullets;
+    }
 
 	public void resetBullets(){
 		currentBullets = maximumBullets;
 		bulletValue.text = currentBullets.ToString() + "/" + maximumBullets.ToString();
-	}
+        bulletBar.value = bulletBar.maxValue;
+    }
 }

@@ -21,19 +21,22 @@ public class BraceletTrackedObjectThread : MonoBehaviour {
     public Transform basestation;
 	public TrackingAlgorithmDouble.sensorDistance array;
 	public TrackingAlgorithmDouble.Imu Imu;
-	public Vector3 Position;
-	/*
+	
+    private Quaternion localAxisFix;
+    /*
 	** DON'T TOUCH. This runs every frame and does distance calculations
 	*/
 
-	void Start(){
+    void Start(){
 		array.AB = 0.06;
 		array.AC = 0.055;
 		array.BC = 0.065;
-		Sensor1.distance = 1;
-		Sensor2.distance = 1;
-		Sensor3.distance = 1;
-        basestation = transform.parent;
+		Sensor1.distance = 2;
+		Sensor2.distance = 2;
+		Sensor3.distance = 2;
+        basestation = transform.parent.Find("Basestation").transform;
+        transform.Rotate(-90, 180, 180);
+        localAxisFix = transform.rotation;
 	}
 
 	void Update () {
@@ -83,7 +86,7 @@ public class BraceletTrackedObjectThread : MonoBehaviour {
 
 		TrackingAlgorithmDouble.runAlgorithm (ref Sensor1, ref Sensor2, ref Sensor3, ref array);
 
-		Debug.Log ("1 " + Sensor1.azimuth * 180.0 / Math.PI + " " + Sensor1.elevation* 180.0 / Math.PI  + " 2 " + Sensor2.azimuth * 180.0 / Math.PI + " " + Sensor2.elevation * 180.0 / Math.PI + " 3 " + Sensor3.azimuth * 180.0 / Math.PI + " " + Sensor3.elevation* 180.0 / Math.PI );
+		//Debug.Log ("1 " + Sensor1.azimuth * 180.0 / Math.PI + " " + Sensor1.elevation* 180.0 / Math.PI  + " 2 " + Sensor2.azimuth * 180.0 / Math.PI + " " + Sensor2.elevation * 180.0 / Math.PI + " 3 " + Sensor3.azimuth * 180.0 / Math.PI + " " + Sensor3.elevation* 180.0 / Math.PI );
 		//Debug.Log ("Position: " + Sensor1.distance + " " + Sensor2.distance + " " + Sensor3.distance);
 		updatePosition (ref Sensor1, ref Sensor2, ref Sensor3, gameObject.GetComponent<BraceletSerialPort>().Imu.a, gameObject.GetComponent<BraceletSerialPort>().Imu.deltaT, gameObject.GetComponent<BraceletSerialPort>().Imu.q);
 	}
@@ -98,7 +101,7 @@ public class BraceletTrackedObjectThread : MonoBehaviour {
 	** Update position of the object
 	*/
 	void updatePosition(ref TrackingAlgorithmDouble.objectLocation sensor1, ref TrackingAlgorithmDouble.objectLocation sensor2, ref TrackingAlgorithmDouble.objectLocation sensor3, Vector3 a, float deltaT, Quaternion q ){
-		Quaternion localAxisFix;
+		Vector3 Position;
 		// Convert to X Y Z Coordinates
 
 		// Sensor 1
@@ -152,16 +155,17 @@ public class BraceletTrackedObjectThread : MonoBehaviour {
 		} 
 		else 
 		{
-			//Position = Imu.s;
+			Position = Imu.s;
 		}
 
-		transform.localPosition = Position;
-
+		transform.localPosition = basestation.localRotation * Position + basestation.localPosition;
+        /*
 		localAxisFix.w = (float)Math.Cos (Math.PI / 4f);
 		localAxisFix.x = 0;
-		localAxisFix.y = 0;
-		localAxisFix.z = (float)Math.Cos (Math.PI / 4f);
-		transform.rotation = q * localAxisFix;
+        localAxisFix.y = 0;
+        localAxisFix.z = (float)Math.Cos(Math.PI / 4f);
+        */
+		transform.rotation = new Quaternion(q.y, q.x, q.z, q.w) * localAxisFix;
 	}
 
 
