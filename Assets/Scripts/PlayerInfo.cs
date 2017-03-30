@@ -64,7 +64,7 @@ public class PlayerInfo : MonoBehaviour {
 	 * 		Affects HP
 	 */
 	public void targetHit(){
-		currentScore -= 1;
+		currentScore += 10;
 		if (currentScore < 0) {
 			currentScore = 0;
 		}
@@ -80,7 +80,7 @@ public class PlayerInfo : MonoBehaviour {
 	}
 
 	public void resetScore(){
-		currentScore = 5;
+		currentScore = 0;
 		scoreValue.text = currentScore.ToString ();
 	}
 
