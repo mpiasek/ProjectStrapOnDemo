@@ -52,6 +52,8 @@ public class ControllerGrabObject : MonoBehaviour {
         collidingObject = null;
         //Add a new joint that connects the object to the controller
         var joint = AddFixedJoint();
+        //objectInHand.transform.rotation = 
+        Debug.Log(this.gameObject.name);
         joint.connectedBody = objectInHand.GetComponent<Rigidbody>();
     }
     // Make a new fixed joint, add it to the controller, and set it so it doesn't break easily

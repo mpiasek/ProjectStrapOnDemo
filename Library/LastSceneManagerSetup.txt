@@ -1,4 +1,4 @@
 sceneSetups:
-- path: Assets/Scenes/VideoDemo.unity
+- path: Assets/Scenes/NewDemoVideo.unity
   isLoaded: 1
   isActive: 1

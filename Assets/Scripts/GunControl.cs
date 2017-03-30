@@ -34,8 +34,10 @@ public class GunControl : NVRInteractableItem
 	{
 		base.UseButtonDown();
         numTargets = int.Parse(targetsLeft.text);
-		//if (playerStatus.GetComponent<PlayerInfo>().currentBullets > 0) {
-		//	playerStatus.GetComponent<PlayerInfo>().deductBullets(1);
+        print("hi");
+		if (playerStatus.GetComponent<PlayerInfo>().currentBullets > 0) {
+		playerStatus.GetComponent<PlayerInfo>().deductBullets(1);
+
 			// Add reference to rounds in magazine
 			AttachedHand.TriggerHapticPulse(2000);
 			RaycastHit hit;
@@ -46,10 +48,10 @@ public class GunControl : NVRInteractableItem
 					playerStatus.GetComponent<PlayerInfo> ().targetHit();
 			
 			}
-		//}
-		//else {
-		//	playerStatus.GetComponent<PlayerInfo> ().resetBullets();
-		//}
+		}
+		else {
+			playerStatus.GetComponent<PlayerInfo> ().resetBullets();
+		}
 	}
-
 }
+
