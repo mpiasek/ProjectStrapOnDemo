@@ -41,4 +41,16 @@ public class GameSystem : MonoBehaviour {
             }
         }
     }
+    public void startRound()
+    {
+        round = 1;
+        targetsLeft.text = "5";
+        foreach (GameObject t in targetsR1)
+            t.SetActive(true);
+        foreach (GameObject t in targetsR2)
+            t.SetActive(false);
+        foreach (GameObject t in targetsR3)
+            t.SetActive(false);
+        return;
+    }
 }

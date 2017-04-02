@@ -9,10 +9,14 @@ public class GunControl : NVRInteractableItem
 
 	public Transform FirePoint;
 	public LayerMask targetMask;
+    private float startTime;
+    private float endTime;
 	private Vector3 hitPoint;
 	public GameObject playerStatus;
+    public GameObject gameSystem;
     public Text targetsLeft;
     public int numTargets = 0;
+
     private bool findTarget(Vector3 hit) {
 		GameObject[] gos = GameObject.FindObjectsOfType(typeof(GameObject)) as GameObject[]; //will return an array of all GameObjects in the scene
 		foreach(GameObject go in gos)
@@ -53,5 +57,20 @@ public class GunControl : NVRInteractableItem
 			playerStatus.GetComponent<PlayerInfo> ().resetBullets();
 		}
 	}
+    public override void BeginInteraction(NVRHand hand)
+    {
+        base.BeginInteraction(hand);
+        gameSystem.GetComponent<GameSystem>().startRound();
+        startTime = Time.time;
+    }
+
+    public override void EndInteraction()
+    {
+        base.EndInteraction();
+        float time;
+        endTime = Time.time;
+        time = endTime - startTime;
+        playerStatus.GetComponent<PlayerInfo>().increaseScore(time);
+    }
 }
 

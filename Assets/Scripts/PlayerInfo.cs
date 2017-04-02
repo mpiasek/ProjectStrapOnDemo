@@ -71,8 +71,8 @@ public class PlayerInfo : MonoBehaviour {
 		scoreValue.text = currentScore.ToString ();
 	}
 
-	public void increaseScore(int amount){
-		currentScore += amount;
+	public void increaseScore(float timeMultiplier){
+		currentScore = currentScore * (int)(100/timeMultiplier);
 //		if (currentScore > maximumHealth) {
 //			resetHealth ();
 //		}
