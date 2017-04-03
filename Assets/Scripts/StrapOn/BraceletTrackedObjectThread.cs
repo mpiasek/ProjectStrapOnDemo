@@ -23,6 +23,7 @@ public class BraceletTrackedObjectThread : MonoBehaviour {
 	public TrackingAlgorithmDouble.Imu Imu;
 	
     private Quaternion localAxisFix;
+    private Quaternion lastQuaternion;
     /*
 	** DON'T TOUCH. This runs every frame and does distance calculations
 	*/
@@ -35,8 +36,8 @@ public class BraceletTrackedObjectThread : MonoBehaviour {
 		Sensor2.distance = 2;
 		Sensor3.distance = 2;
         basestation = transform.parent.Find("Basestation").transform;
-        transform.Rotate(-90, 180, 180);
-        localAxisFix = transform.rotation;
+        //transform.Rotate(-90, 180, 180);
+        lastQuaternion = transform.rotation;
 	}
 
 	void Update () {
@@ -159,13 +160,21 @@ public class BraceletTrackedObjectThread : MonoBehaviour {
 		}
 
 		transform.localPosition = basestation.localRotation * Position + basestation.localPosition;
-        /*
+        
+
 		localAxisFix.w = (float)Math.Cos (Math.PI / 4f);
 		localAxisFix.x = 0;
         localAxisFix.y = 0;
         localAxisFix.z = (float)Math.Cos(Math.PI / 4f);
-        */
+        
 		transform.rotation = new Quaternion(q.y, q.x, q.z, q.w) * localAxisFix;
+
+        /*
+        ** Other quaternion method
+        */
+        Quaternion diffQuat = Quaternion.Inverse(q) * lastQuaternion;
+        transform.Rotate(diffQuat.eulerAngles, Space.World);
+        lastQuaternion = q;
 	}
 
 

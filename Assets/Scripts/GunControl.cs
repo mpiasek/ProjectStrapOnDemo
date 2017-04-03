@@ -38,9 +38,8 @@ public class GunControl : NVRInteractableItem
 	{
 		base.UseButtonDown();
         numTargets = int.Parse(targetsLeft.text);
-        print("hi");
 		if (playerStatus.GetComponent<PlayerInfo>().currentBullets > 0) {
-		playerStatus.GetComponent<PlayerInfo>().deductBullets(1);
+		    playerStatus.GetComponent<PlayerInfo>().deductBullets(1);
 
 			// Add reference to rounds in magazine
 			AttachedHand.TriggerHapticPulse(2000);
