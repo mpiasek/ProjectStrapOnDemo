@@ -4,10 +4,16 @@ using System;
 using AssemblyCSharp;
 
 public class BraceletTrackedObjectThread : MonoBehaviour {
+    public TrackingAlgorithmDouble.objectLocation [] Sensors;
+    public TrackingAlgorithmDouble.objectLocation[] ChosenSensors;
+    private bool [] PickSensors;
+    
+    /*
 	public TrackingAlgorithmDouble.objectLocation Sensor1;
 	public TrackingAlgorithmDouble.objectLocation Sensor2;
 	public TrackingAlgorithmDouble.objectLocation Sensor3;
 
+    
 	public TrackingAlgorithmDouble.objectLocation Sensor4;
 	public TrackingAlgorithmDouble.objectLocation Sensor5;
 	public TrackingAlgorithmDouble.objectLocation Sensor6;
@@ -17,6 +23,7 @@ public class BraceletTrackedObjectThread : MonoBehaviour {
 	public TrackingAlgorithmDouble.objectLocation Sensor9;
 
 	public TrackingAlgorithmDouble.objectLocation Sensor10;
+    */
 
     public Transform basestation;
 	public TrackingAlgorithmDouble.sensorDistance array;
@@ -29,21 +36,29 @@ public class BraceletTrackedObjectThread : MonoBehaviour {
 	*/
 
     void Start(){
+        Sensors = new TrackingAlgorithmDouble.objectLocation[5];
+        ChosenSensors = new TrackingAlgorithmDouble.objectLocation[3];
+        PickSensors = new bool[5];
+
 		array.AB = 0.06;
 		array.AC = 0.055;
 		array.BC = 0.065;
-		Sensor1.distance = 2;
-		Sensor2.distance = 2;
-		Sensor3.distance = 2;
+
+        Sensors[0].distance = 2;
+        Sensors[1].distance = 2;
+        Sensors[2].distance = 2;
+        Sensors[3].distance = 2;
+        Sensors[4].distance = 2;
+
         basestation = transform.parent.Find("Basestation").transform;
-        //transform.Rotate(-90, 180, 180);
         lastQuaternion = transform.rotation;
 	}
 
 	void Update () {
 		//actualPosition ();
 		//Debug.Log ("Position: " + Sensor1.distance + " " + Sensor2.distance + " " + Sensor3.distance);
-		/*
+		
+        /*
 		Sensor1.azimuth = gameObject.GetComponent<SerialPortThread>().Sensor1.azimuth;
 		Sensor1.elevation = gameObject.GetComponent<SerialPortThread>().Sensor1.elevation;
 
@@ -55,48 +70,58 @@ public class BraceletTrackedObjectThread : MonoBehaviour {
 		*/
 
 		// Grab new data from the other SerialPortThread script
-		Sensor1.azimuth = gameObject.GetComponent<BraceletSerialPort>().Sensor1.azimuth;
-		Sensor1.elevation = gameObject.GetComponent<BraceletSerialPort>().Sensor1.elevation;
+		Sensors[0].azimuth = gameObject.GetComponent<BraceletSerialPort>().Sensor1.azimuth;
+        Sensors[0].elevation = gameObject.GetComponent<BraceletSerialPort>().Sensor1.elevation;
 
-		Sensor2.azimuth = gameObject.GetComponent<BraceletSerialPort>().Sensor2.azimuth;
-		Sensor2.elevation = gameObject.GetComponent<BraceletSerialPort>().Sensor2.elevation;
+        Sensors[1].azimuth = gameObject.GetComponent<BraceletSerialPort>().Sensor2.azimuth;
+        Sensors[1].elevation = gameObject.GetComponent<BraceletSerialPort>().Sensor2.elevation;
 
-		Sensor3.azimuth = gameObject.GetComponent<BraceletSerialPort>().Sensor3.azimuth;
-		Sensor3.elevation = gameObject.GetComponent<BraceletSerialPort>().Sensor3.elevation;
+        Sensors[2].azimuth = gameObject.GetComponent<BraceletSerialPort>().Sensor3.azimuth;
+        Sensors[2].elevation = gameObject.GetComponent<BraceletSerialPort>().Sensor3.elevation;
 
-		Sensor4.azimuth = gameObject.GetComponent<BraceletSerialPort>().Sensor4.azimuth;
-		Sensor4.elevation = gameObject.GetComponent<BraceletSerialPort>().Sensor4.elevation;
+        Sensors[3].azimuth = gameObject.GetComponent<BraceletSerialPort>().Sensor4.azimuth;
+        Sensors[3].elevation = gameObject.GetComponent<BraceletSerialPort>().Sensor4.elevation;
 
-		Sensor5.azimuth = gameObject.GetComponent<BraceletSerialPort>().Sensor5.azimuth;
-		Sensor5.elevation = gameObject.GetComponent<BraceletSerialPort>().Sensor5.elevation;
+		Sensors[4].azimuth = gameObject.GetComponent<BraceletSerialPort>().Sensor5.azimuth;
+		Sensors[4].elevation = gameObject.GetComponent<BraceletSerialPort>().Sensor5.elevation;
 
-		Sensor6.azimuth = gameObject.GetComponent<BraceletSerialPort>().Sensor6.azimuth;
-		Sensor6.elevation = gameObject.GetComponent<BraceletSerialPort>().Sensor6.elevation;
+        /*
+        ** Pick Sensors to run algorithm with
+        ** 
+        */
+        for(int i=0; i<PickSensors.Length; i++) {
+            PickSensors[i] = false;
+        }
 
-		Sensor7.azimuth = gameObject.GetComponent<BraceletSerialPort>().Sensor7.azimuth;
-		Sensor7.elevation = gameObject.GetComponent<BraceletSerialPort>().Sensor7.elevation;
-
-		Sensor8.azimuth = gameObject.GetComponent<BraceletSerialPort>().Sensor8.azimuth;
-		Sensor8.elevation = gameObject.GetComponent<BraceletSerialPort>().Sensor8.elevation;
-
-		Sensor9.azimuth = gameObject.GetComponent<BraceletSerialPort>().Sensor9.azimuth;
-		Sensor9.elevation = gameObject.GetComponent<BraceletSerialPort>().Sensor9.elevation;
-
-		Sensor10.azimuth = gameObject.GetComponent<BraceletSerialPort>().Sensor10.azimuth;
-		Sensor10.elevation = gameObject.GetComponent<BraceletSerialPort>().Sensor10.elevation;
-
-		TrackingAlgorithmDouble.runAlgorithm (ref Sensor1, ref Sensor2, ref Sensor3, ref array);
+        
+		TrackingAlgorithmDouble.runAlgorithm (ref ChosenSensors[0], ref ChosenSensors[1], ref ChosenSensors[2], ref array);
 
 		//Debug.Log ("1 " + Sensor1.azimuth * 180.0 / Math.PI + " " + Sensor1.elevation* 180.0 / Math.PI  + " 2 " + Sensor2.azimuth * 180.0 / Math.PI + " " + Sensor2.elevation * 180.0 / Math.PI + " 3 " + Sensor3.azimuth * 180.0 / Math.PI + " " + Sensor3.elevation* 180.0 / Math.PI );
 		//Debug.Log ("Position: " + Sensor1.distance + " " + Sensor2.distance + " " + Sensor3.distance);
-		updatePosition (ref Sensor1, ref Sensor2, ref Sensor3, gameObject.GetComponent<BraceletSerialPort>().Imu.a, gameObject.GetComponent<BraceletSerialPort>().Imu.deltaT, gameObject.GetComponent<BraceletSerialPort>().Imu.q);
+		updatePosition (ref ChosenSensors[0], ref ChosenSensors[1], ref ChosenSensors[2], gameObject.GetComponent<BraceletSerialPort>().Imu.a, gameObject.GetComponent<BraceletSerialPort>().Imu.deltaT, gameObject.GetComponent<BraceletSerialPort>().Imu.q);
 	}
 
 	/*
 	** 
 	*/
 	void chooseSensors (){
-	}
+        int j = 0;
+        for (int i = 0; i < Sensors.Length; i++) {
+            if (Sensors[i].azimuth != 0) {
+                ChosenSensors[j] = Sensors[i];
+                PickSensors[i] = true;
+                j++;
+            }
+            if (j == 3) {
+                break;
+            }
+
+        }
+    }
+
+    void updateSensors() {
+
+    }
 
 	/*
 	** Update position of the object
@@ -159,22 +184,24 @@ public class BraceletTrackedObjectThread : MonoBehaviour {
 			Position = Imu.s;
 		}
 
-		transform.localPosition = basestation.localRotation * Position + basestation.localPosition;
-        
+        //transform.localPosition = basestation.localRotation * Position + basestation.localPosition;
+        transform.position =  Position + basestation.position;
 
-		localAxisFix.w = (float)Math.Cos (Math.PI / 4f);
+        localAxisFix.w = (float)Math.Cos (Math.PI / 4f);
 		localAxisFix.x = 0;
         localAxisFix.y = 0;
         localAxisFix.z = (float)Math.Cos(Math.PI / 4f);
         
-		transform.rotation = new Quaternion(q.y, q.x, q.z, q.w) * localAxisFix;
+		transform.rotation = q* localAxisFix;
 
         /*
         ** Other quaternion method
         */
+        /*
         Quaternion diffQuat = Quaternion.Inverse(q) * lastQuaternion;
         transform.Rotate(diffQuat.eulerAngles, Space.World);
         lastQuaternion = q;
+        */
 	}
 
 
