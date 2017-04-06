@@ -1,8 +1,9 @@
 ﻿<Properties StartupItem="Assembly-CSharp.csproj">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/GunControl.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/StrapOn/BraceletTrackedObjectThread.cs">
     <Files>
-      <File FileName="Assets/Scripts/GunControl.cs" Line="51" Column="2" />
+      <File FileName="Assets/Scripts/StrapOn/BraceletTrackedObjectThread.cs" Line="229" Column="46" />
+      <File FileName="Assets/Scripts/StrapOn/BraceletSerialPort.cs" Line="206" Column="7" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

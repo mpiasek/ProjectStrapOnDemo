@@ -110,7 +110,7 @@ public class BraceletSerialPort : MonoBehaviour {
 						Sensor3.elevation = (180.0 - temp) * Math.PI / 180.0;
 
 
-						/*
+
 						if (!float.TryParse (parser [11], out temp)) {
 							Debug.Log ("Unable to convert 4Azimuth");
 							continue;
@@ -135,6 +135,7 @@ public class BraceletSerialPort : MonoBehaviour {
 						}
 						Sensor5.elevation = (180.0 - temp) * Math.PI / 180.0;
 
+						/*
 						if (!float.TryParse (parser [17], out temp)) {
 							Debug.Log ("Unable to convert 6Azimuth");
 							continue;
@@ -203,6 +204,7 @@ public class BraceletSerialPort : MonoBehaviour {
 					}
 					else if(parser[0] == "IMU")
 					{
+						//Debug.Log("Read from IMU");
 						if (!float.TryParse (parser [1], out temp)) {
 							Debug.Log ("Unable to find Qw");
 							continue;
@@ -226,6 +228,7 @@ public class BraceletSerialPort : MonoBehaviour {
 							continue;
 						};
 						Imu.q.z = temp;
+
 
 						if (!float.TryParse (parser [5], out temp)) {
 							Debug.Log ("Unable to find World Acceleration X");

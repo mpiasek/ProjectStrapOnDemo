@@ -31,6 +31,7 @@ public class BraceletTrackedObjectThread : MonoBehaviour {
 	public TrackingAlgorithmDouble.Imu Imu;
 	
     private Quaternion localAxisFix;
+	private Quaternion localAxisFixX;
     private Quaternion lastQuaternion;
     /*
 	** DON'T TOUCH. This runs every frame and does distance calculations
@@ -83,6 +84,7 @@ public class BraceletTrackedObjectThread : MonoBehaviour {
         Sensors[2].azimuth = gameObject.GetComponent<BraceletSerialPort>().Sensor3.azimuth;
         Sensors[2].elevation = gameObject.GetComponent<BraceletSerialPort>().Sensor3.elevation;
 
+
         Sensors[3].azimuth = gameObject.GetComponent<BraceletSerialPort>().Sensor4.azimuth;
         Sensors[3].elevation = gameObject.GetComponent<BraceletSerialPort>().Sensor4.elevation;
 
@@ -93,10 +95,11 @@ public class BraceletTrackedObjectThread : MonoBehaviour {
         ** Pick Sensors to run algorithm with
         ** 
         */
+
         for(int i=0; i<PickSensors.Length; i++) {
             PickSensors[i] = false;
         }
-
+		chooseSensors ();
         
 		TrackingAlgorithmDouble.runAlgorithm (ref ChosenSensors[0], ref ChosenSensors[1], ref ChosenSensors[2], ref array);
 
@@ -142,6 +145,7 @@ public class BraceletTrackedObjectThread : MonoBehaviour {
 	void updatePosition(ref TrackingAlgorithmDouble.objectLocation sensor1, ref TrackingAlgorithmDouble.objectLocation sensor2, ref TrackingAlgorithmDouble.objectLocation sensor3, Vector3 a, float deltaT, Quaternion q ){
 		Vector3 Position;
 		// Convert to X Y Z Coordinates
+
 
 		// Sensor 1
 		double sens1XZ = Math.Sin(sensor1.elevation) * sensor1.distance;
@@ -195,26 +199,43 @@ public class BraceletTrackedObjectThread : MonoBehaviour {
 		else 
 		{
 			Position = Imu.s;
+			//Position = new Vector3 (sens1x, sens1y, sens1z);
 		}
 
-        //transform.localPosition = basestation.localRotation * Position + basestation.localPosition;
-        transform.position =  Position + basestation.position;
+        transform.localPosition = basestation.localRotation * Position + basestation.localPosition;
+        //transform.position =  Position + basestation.position;
 
         localAxisFix.w = (float)Math.Cos (Math.PI / 4f);
 		localAxisFix.x = 0;
         localAxisFix.y = 0;
         localAxisFix.z = (float)Math.Cos(Math.PI / 4f);
         
-		transform.rotation = q* localAxisFix;
+		localAxisFixX.w = (float)Math.Cos (Math.PI / 4f);
+		localAxisFixX.x = 0;
+	    localAxisFixX.y = (float)Math.Cos(Math.PI / 4f);
+		localAxisFixX.z = 0;
+
+		//transform.rotation = q* localAxisFix * localAxisFixX;
+		//transform.rotation = q * localAxisFix;
+		//transform.rotation = q;
+		//Quaternion newQ = Quaternion.Euler(0, 90, 0);
+
+		/*
+		Quaternion diffQuat = Quaternion.Inverse(q) * lastQuaternion;
+		transform.Rotate(diffQuat.eulerAngles, Space.World);
+		lastQuaternion = q;
+		*/
+		q = new Quaternion (-q.x, q.y, -q.z, q.w);
+		transform.rotation = q * Quaternion.Euler(0, 0, 0);
 
         /*
         ** Other quaternion method
         */
-        /*
-        Quaternion diffQuat = Quaternion.Inverse(q) * lastQuaternion;
-        transform.Rotate(diffQuat.eulerAngles, Space.World);
-        lastQuaternion = q;
-        */
+        
+        //Quaternion diffQuat = Quaternion.Inverse(q) * lastQuaternion;
+        //transform.Rotate(diffQuat.eulerAngles, Space.World);
+        //lastQuaternion = q;
+        
 	}
 
 
