@@ -6,6 +6,7 @@ using AssemblyCSharp;
 public class BraceletTrackedObjectThread : MonoBehaviour {
     public TrackingAlgorithmDouble.objectLocation [] Sensors;
     public TrackingAlgorithmDouble.objectLocation[] ChosenSensors;
+    public double[,] SensorDistances;
     private bool [] PickSensors;
     
     /*
@@ -34,6 +35,9 @@ public class BraceletTrackedObjectThread : MonoBehaviour {
     /*
 	** DON'T TOUCH. This runs every frame and does distance calculations
 	*/
+    private void Awake() {
+        SensorDistances = new double[5,5];
+    }
 
     void Start(){
         Sensors = new TrackingAlgorithmDouble.objectLocation[5];
@@ -102,14 +106,16 @@ public class BraceletTrackedObjectThread : MonoBehaviour {
 	}
 
 	/*
-	** 
+	** Picks the first set of sensors available
 	*/
 	void chooseSensors (){
         int j = 0;
+        int[] sensors = { 0, 0, 0 };
         for (int i = 0; i < Sensors.Length; i++) {
             if (Sensors[i].azimuth != 0) {
                 ChosenSensors[j] = Sensors[i];
                 PickSensors[i] = true;
+                sensors[j] = i;
                 j++;
             }
             if (j == 3) {
@@ -117,8 +123,15 @@ public class BraceletTrackedObjectThread : MonoBehaviour {
             }
 
         }
+
+        array.AB = SensorDistances[sensors[0], sensors[1]];
+        array.AC = SensorDistances[sensors[0], sensors[2]];
+        array.BC = SensorDistances[sensors[1], sensors[2]];
     }
 
+    /*
+    **  After updatePosition, we should update distances of each sensor
+    */
     void updateSensors() {
 
     }
